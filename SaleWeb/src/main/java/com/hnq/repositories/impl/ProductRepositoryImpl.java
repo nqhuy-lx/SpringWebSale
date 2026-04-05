@@ -30,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @PropertySource("classpath:configs.properties")
 public class ProductRepositoryImpl implements ProductRepository {
+
     @Autowired
     private Environment env;
     @Autowired
@@ -85,15 +86,16 @@ public class ProductRepositoryImpl implements ProductRepository {
 //        }
 //    }
 //    
-//    public void addOrUpdateProduct(Product p) {
-//        try (Session session = HibernateUtils.getFACTORY().openSession()) {
-//            if (p.getId() != null) {
-//                session.merge(p);
-//            } else {
-//                session.persist(p);
-//            }
-//        }
-//    }
+    @Override
+    public void addOrUpdateProduct(Product p) {
+        Session s = this.factory.getObject().getCurrentSession();
+        if (p.getId() == null) {
+            s.persist(p);
+        } else {
+            s.merge(p);
+        }
+
+    }
 //    
 //    public void deleteProduct(int id) {
 //        try (Session session = HibernateUtils.getFACTORY().openSession()) { 
