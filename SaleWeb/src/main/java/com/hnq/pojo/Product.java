@@ -4,6 +4,7 @@
  */
 package com.hnq.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -41,6 +42,8 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Product.findByImage", query = "SELECT p FROM Product p WHERE p.image = :image"),
     @NamedQuery(name = "Product.findByCreatedDate", query = "SELECT p FROM Product p WHERE p.createdDate = :createdDate"),
     @NamedQuery(name = "Product.findByActive", query = "SELECT p FROM Product p WHERE p.active = :active")})
+
+@JsonIgnoreProperties(value= {"prodTagSet","commentSet", "orderDetailSet"})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
