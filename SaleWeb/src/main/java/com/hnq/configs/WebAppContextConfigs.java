@@ -43,17 +43,7 @@ public class WebAppContextConfigs implements WebMvcConfigurer{
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new CategoryFormatter());
     }
-    
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloudinary
-                = new Cloudinary(ObjectUtils.asMap(
-                        "cloud_name", "uploadstatic",
-                        "api_key", "192984554588374",
-                        "api_secret", "pJB25mr86dVIemjALn2TgJXcj0M",
-                        "secure", true));
-        return cloudinary;
-    }
+
     
     @Bean
     public StandardServletMultipartResolver multipartResolver() {

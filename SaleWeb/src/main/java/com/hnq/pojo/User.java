@@ -4,6 +4,8 @@
  */
 package com.hnq.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -61,6 +63,7 @@ public class User implements Serializable {
     private String username;
     @Basic(optional = false)
     @Column(name = "password")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @Column(name = "active")
     private Boolean active;
@@ -70,8 +73,10 @@ public class User implements Serializable {
     @Column(name = "avatar")
     private String avatar;
     @OneToMany(mappedBy = "userId")
+    @JsonIgnore
     private Set<SaleOrder> saleOrderSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @JsonIgnore
     private Set<Comment> commentSet;
 
     public User() {
